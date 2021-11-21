@@ -46,6 +46,9 @@ def generate_testdata():
     }""",
             "%d-%m-%Y"
         ) for _ in final_df.index]
+    final_df.loc[final_df.index, 'metric'] = [
+        np.random.randint(11,2898) for _ in final_df.index
+    ]
     return final_df
 
 
