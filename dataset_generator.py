@@ -5,6 +5,7 @@ import csv
 from sklearn.utils import shuffle
 from random import choice
 from string import ascii_lowercase, digits
+from datetime import datetime
 
 
 # %%
@@ -34,6 +35,17 @@ def generate_testdata():
             df.loc[:, _].apply(str)
     df_list.append(df)
     final_df = pd.concat(df_list, ignore_index=True)
+    final_df.loc[final_df.index, 'date'] = [
+        datetime.strptime(
+            f"""{
+        np.random.randint(11,28)
+    }-{
+        np.random.randint(1,12)
+    }-{
+        np.random.randint(2017,2020)
+    }""",
+            "%d-%m-%Y"
+        ) for _ in final_df.index]
     return final_df
 
 
